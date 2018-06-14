@@ -5,109 +5,140 @@
     android:layout_height="match_parent"
     android:scrollbars="none">
 
-    <LinearLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         >
 
-        <RelativeLayout
+        <FrameLayout
+            android:id="@+id/frameLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <RelativeLayout
+            <ImageView
+                android:id="@+id/imageView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_launcher"/>
 
-                <FrameLayout
-                    android:id="@+id/frameLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/linearView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@color/colorPrimary"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:visibility="gone">
 
-                    <ImageView
-                        android:id="@+id/imageView"
-                        android:layout_width="match_parent"
+                <LinearLayout
+                    android:id="@+id/layoutButtons"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <Button
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:adjustViewBounds="true"
-                        android:scaleType="fitXY"
-                        android:src="@mipmap/ic_launcher"/>
+                        android:text="@string/app_name"/>
 
-                    <LinearLayout
-                        android:id="@+id/linearView"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:background="@color/colorPrimary"
-                        android:gravity="center_vertical"
-                        android:orientation="vertical"
-                        android:visibility="gone">
-
-                        <LinearLayout
-                            android:id="@+id/layoutButtons"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_horizontal"
-                            android:orientation="vertical"
-                            android:visibility="gone">
-
-                            <Button
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/app_name"/>
-
-                            <Button
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/app_name"/>
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/app_name"/>
 
 
-                            <Button
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/app_name"/>
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/app_name"/>
 
 
-                        </LinearLayout>
+                </LinearLayout>
 
-                    </LinearLayout>
+            </LinearLayout>
 
-                </FrameLayout>
+            <ImageButton
+                android:id="@+id/imageButton5"
+                android:layout_width="@dimen/fab_width"
+                android:layout_height="@dimen/fab_width"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/fab_margin"
+                android:adjustViewBounds="true"
+                android:background="@drawable/rounded_button"
+                android:elevation="4dp"
+                android:src="@drawable/ic_message_white_24dp"/>
 
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/frameLayout"
-                    android:text="@string/demo_text"
-                    android:layout_margin="@dimen/dp_10"
-                    android:textStyle="bold"/>
+            <ImageButton
+                android:id="@+id/imageButton1"
+                android:layout_width="@dimen/fab_width"
+                android:layout_height="@dimen/fab_width"
+                android:layout_gravity="top|start"
+                android:layout_margin="@dimen/fab_margin"
+                android:adjustViewBounds="true"
+                android:background="@drawable/rounded_button"
+                android:elevation="4dp"
+                android:src="@drawable/ic_message_white_24dp"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/textView"
-                    android:text="@string/demo_text"
-                    android:layout_margin="@dimen/dp_10"
-                    android:textStyle="italic"/>
+            <ImageButton
+                android:id="@+id/imageButton3"
+                android:layout_width="@dimen/fab_width"
+                android:layout_height="@dimen/fab_width"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/fab_margin"
+                android:adjustViewBounds="true"
+                android:background="@drawable/rounded_button"
+                android:elevation="4dp"
+                android:src="@drawable/ic_message_white_24dp"/>
 
-                <ImageButton
-                    android:id="@+id/imageMessage"
-                    android:layout_width="@dimen/fab_width"
-                    android:layout_height="@dimen/fab_width"
-                    android:layout_alignParentEnd="true"
-                    android:layout_gravity="bottom|end"
-                    android:layout_margin="@dimen/fab_margin"
-                    android:adjustViewBounds="true"
-                    android:background="@drawable/rounded_button"
-                    android:elevation="4dp"
-                    android:onClick="launchAnimation"
-                    android:src="@drawable/ic_message_white_24dp"/>
+            <ImageButton
+                android:id="@+id/imageButton4"
+                android:layout_width="@dimen/fab_width"
+                android:layout_height="@dimen/fab_width"
+                android:layout_gravity="left|bottom"
+                android:layout_margin="@dimen/fab_margin"
+                android:adjustViewBounds="true"
+                android:background="@drawable/rounded_button"
+                android:elevation="4dp"
+                android:src="@drawable/ic_message_white_24dp"/>
 
-            </RelativeLayout>
+            <ImageButton
+                android:id="@+id/imageButton2"
+                android:layout_width="@dimen/fab_width"
+                android:layout_height="@dimen/fab_width"
+                android:layout_gravity="right|top"
+                android:layout_margin="@dimen/fab_margin"
+                android:adjustViewBounds="true"
+                android:background="@drawable/rounded_button"
+                android:elevation="4dp"
+                android:src="@drawable/ic_message_white_24dp"/>
 
+        </FrameLayout>
 
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/frameLayout"
+            android:layout_margin="@dimen/dp_10"
+            android:text="@string/demo_text"
+            android:textStyle="bold"/>
 
-    </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView"
+            android:layout_margin="@dimen/dp_10"
+            android:text="@string/demo_text"
+            android:textStyle="italic"/>
+
+    </RelativeLayout>
+
 
 </ScrollView>
 

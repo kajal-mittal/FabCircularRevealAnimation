@@ -1,79 +1,47 @@
 package com.kmdev.fabbuttonanimation;
 import android.animation.Animator;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private ImageView mImageView;
     private boolean flag = true;
-    private ImageButton mImageButton;
+    private ImageButton mImageButton1, mImageButton2, mImageButton3, mImageButton4, mImageButton5;
     private LinearLayout mLayoutButtons;
     private LinearLayout mRevealView;
+    private int centerX;
+    private int centerY;
+    private int endRadius;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mImageView = (ImageView) findViewById(R.id.imageView);
-        mImageButton = (ImageButton) findViewById(R.id.imageMessage);
+        mImageButton1 = (ImageButton) findViewById(R.id.imageButton1);
+        mImageButton2 = (ImageButton) findViewById(R.id.imageButton2);
+        mImageButton3 = (ImageButton) findViewById(R.id.imageButton3);
+        mImageButton4 = (ImageButton) findViewById(R.id.imageButton4);
+        mImageButton5 = (ImageButton) findViewById(R.id.imageButton5);
         mRevealView = (LinearLayout) findViewById(R.id.linearView);
         mLayoutButtons = (LinearLayout) findViewById(R.id.layoutButtons);
+        //click listeners
+        mImageButton1.setOnClickListener(this);
+        mImageButton2.setOnClickListener(this);
+        mImageButton3.setOnClickListener(this);
+        mImageButton4.setOnClickListener(this);
+        mImageButton5.setOnClickListener(this);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public void launchAnimation(View view) {
-/*
-      get the center for the clipping circle
-      int centerX = (imageView.getLeft() + imageView.getRight()) / 2;
-      int centerY = (imageView.getTop() + imageView.getBottom()) / 2;
-
-        int centerX = imageView.getLeft();
-        int centerY = imageView.getTop();
-
-        int centerX = imageView.getRight();
-        int centerY = imageView.getTop();
-
-
-*/
-        int centerX = mImageView.getRight();
-        int centerY = mImageView.getTop();
+    public void launchAnimation(int centerX, int centerY, int endRadius, ImageView view) {
         int startRadius = 0;
-        // get the final radius for the clipping circle
-        int endRadius = (int) Math.hypot(mImageView.getWidth(), mImageView.getHeight());
-
         if (flag) {
-            mImageButton.setImageResource(R.drawable.ic_close_white_24dp);
+            view.setImageResource(R.drawable.ic_close_white_24dp);
             FrameLayout.LayoutParams parameters = (FrameLayout.LayoutParams)
                     mRevealView.getLayoutParams();
             parameters.height = mImageView.getHeight();
@@ -107,8 +75,11 @@ public class MainActivity extends AppCompatActivity {
             anim.start();
             flag = false;
         } else {
-            mImageButton.setImageResource(R.drawable.ic_message_white_24dp);
-            Animator anim = ViewAnimationUtils.createCircularReveal(mRevealView, centerX, centerY, endRadius, 0);
+            view.setImageResource(R.drawable.ic_message_white_24dp);
+            Animator anim = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                anim = ViewAnimationUtils.createCircularReveal(mRevealView, centerX, centerY, endRadius, 0);
+            }
             anim.setDuration(400);
             // make the view visible and start the animation
             anim.addListener(new Animator.AnimatorListener() {
@@ -132,6 +103,44 @@ public class MainActivity extends AppCompatActivity {
             });
             anim.start();
             flag = true;
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.imageButton1:
+                //get the center for the clipping circle
+                centerX = mImageView.getLeft();
+                centerY = mImageView.getTop();
+                // get the final radius for the clipping circle
+                endRadius = (int) Math.hypot(mImageView.getWidth(), mImageView.getHeight());
+                launchAnimation(centerX, centerY, endRadius, mImageButton1);
+                break;
+            case R.id.imageButton2:
+                centerX = mImageView.getRight();
+                centerY = mImageView.getTop();
+                endRadius = (int) Math.hypot(mImageView.getWidth(), mImageView.getHeight());
+                launchAnimation(centerX, centerY, endRadius, mImageButton2);
+                break;
+            case R.id.imageButton3:
+                centerX = (mImageView.getLeft() + mImageView.getRight()) / 2;
+                centerY = (mImageView.getTop() + mImageView.getBottom()) / 2;
+                endRadius = (int) Math.hypot(mImageView.getWidth(), mImageView.getHeight());
+                launchAnimation(centerX, centerY, endRadius, mImageButton3);
+                break;
+            case R.id.imageButton4:
+                centerX = mImageView.getLeft();
+                centerY = mImageView.getBottom();
+                endRadius = (int) Math.hypot(mImageView.getWidth(), mImageView.getHeight());
+                launchAnimation(centerX, centerY, endRadius, mImageButton4);
+                break;
+            case R.id.imageButton5:
+                centerX = mImageView.getRight();
+                centerY = mImageView.getBottom();
+                endRadius = (int) Math.hypot(mImageView.getWidth(), mImageView.getHeight());
+                launchAnimation(centerX, centerY, endRadius, mImageButton5);
+                break;
         }
     }
 }
